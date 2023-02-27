@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33213.308
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hairdresser.Api", "Hairdresser.Api\Hairdresser.Api.csproj", "{571326E4-E8AD-4CB0-8643-110B1A0DE612}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Common\Common.csproj", "{333042B9-A26F-4B6D-8331-EBA86E2927E7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{571326E4-E8AD-4CB0-8643-110B1A0DE612}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{571326E4-E8AD-4CB0-8643-110B1A0DE612}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{571326E4-E8AD-4CB0-8643-110B1A0DE612}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{571326E4-E8AD-4CB0-8643-110B1A0DE612}.Release|Any CPU.Build.0 = Release|Any CPU
+		{333042B9-A26F-4B6D-8331-EBA86E2927E7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{333042B9-A26F-4B6D-8331-EBA86E2927E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{333042B9-A26F-4B6D-8331-EBA86E2927E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{333042B9-A26F-4B6D-8331-EBA86E2927E7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C2810A15-B6F6-432B-8865-1D945F85CD0F}
+	EndGlobalSection
+EndGlobal
