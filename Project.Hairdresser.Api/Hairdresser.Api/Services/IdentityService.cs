@@ -93,6 +93,7 @@ namespace Hairdresser.Api.Services
                         new Claim(JwtRegisteredClaimNames.Email, user.Email),
                         new Claim("id", user.Id.ToString()),
                     }),
+
                 Expires = DateTime.UtcNow.AddHours(2),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
             };

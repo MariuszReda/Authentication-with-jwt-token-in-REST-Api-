@@ -53,5 +53,22 @@ namespace Hairdresser.Api.Services
             }
             return false;
         }
+
+        public async Task<bool> UserOwnsPostAsync(Guid postId, string getUserId)
+        {
+            var post = await _dataContext.Posts.AsNoTracking().SingleOrDefaultAsync(x=>x.Id == postId);
+
+            if(post == null)
+            {
+                return false;
+            }
+
+            if(post.AccountId != Guid.Parse( getUserId))
+            {
+                return false;
+            }
+
+            return true;
+        }
     }
 }

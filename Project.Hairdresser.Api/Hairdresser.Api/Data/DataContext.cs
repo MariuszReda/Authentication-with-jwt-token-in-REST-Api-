@@ -16,22 +16,22 @@ namespace Hairdresser.Api.Data
 
         public DbSet<Post> Posts => Set<Post>();
 
-        protected override void OnModelCreating(ModelBuilder builder)
-        {
-            base.OnModelCreating(builder);
+        //protected override void OnModelCreating(ModelBuilder builder)
+        //{
+        //    base.OnModelCreating(builder);
 
-            builder.Entity<Account>()
-                .HasMany(account => account.AccountRoles)
-                .WithOne(accountRole => accountRole.Account)
-                .HasForeignKey(account => account.UserId)
-                .IsRequired();
+        //    builder.Entity<Account>()
+        //        .HasMany(account => account.AccountRoles)
+        //        .WithOne(accountRole => accountRole.Account)
+        //        .HasForeignKey(account => account.UserId)
+        //        .IsRequired();
 
-            builder.Entity<Role>()
-                .HasMany(role => role.AccountRoles)
-                .WithOne(accountRole => accountRole.Role)
-                .HasForeignKey(account => account.RoleId)
-                .IsRequired();
-        }
+        //    builder.Entity<Role>()
+        //        .HasMany(role => role.AccountRoles)
+        //        .WithOne(accountRole => accountRole.Role)
+        //        .HasForeignKey(account => account.RoleId)
+        //        .IsRequired();
+        //}
 
     }
 }

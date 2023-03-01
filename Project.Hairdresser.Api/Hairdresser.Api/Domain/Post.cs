@@ -1,4 +1,5 @@
 ﻿using Hairdresser.Api.Models;
+using Microsoft.AspNetCore.Identity;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Hairdresser.Api.Domain
@@ -7,8 +8,9 @@ namespace Hairdresser.Api.Domain
     {
         public Guid Id { get; set; }
         public string Name { get; set; }
-        public string UserId { get; set; }
-        [ForeignKey(nameof(UserId))]
-        public Account User { get; set; }
+        public Guid AccountId { get; set; }
+
+        [ForeignKey(nameof(AccountId))]
+        public Account Account { get; set; }
     }
 }
