@@ -13,6 +13,7 @@ namespace Hairdresser.Api.Installers
 
             services.AddScoped<IIdentityService, IdentityService>();
             services.AddScoped<IPostService, PostService>();
+            services.AddScoped<ITagService, TagService>();
 
         }
         

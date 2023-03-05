@@ -26,7 +26,7 @@ namespace Hairdresser.Api.Services
         public async Task<bool> CreatePostAsync(Post post)
         {
             await _dataContext.Posts.AddAsync(post);
-            var create = _dataContext.SaveChanges();
+            var create = await _dataContext.SaveChangesAsync();
             return create > 0;
         }
 
@@ -71,9 +71,6 @@ namespace Hairdresser.Api.Services
             return true;
         }
 
-        public async Task<List<Tag>> GetAllTagsAsync()
-        {
-            return await _dataContext.Tags.ToListAsync();
-        }
+
     }
 }

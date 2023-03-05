@@ -26,7 +26,9 @@
         public static class Tags
         {
             public const string GetAll = Base + "/tags";
-            public const string test = Base + "/test";
+            public const string Create = Base + "/tags";
+            public const string Get = Base + "/tags/{tagName}";
+            public const string Delete = Base + "/tags/{tagName}";
         }
 
     }

@@ -9,7 +9,6 @@ namespace Hairdresser.Api.Domain
         public Guid Id { get; set; }
         public string Name { get; set; }
         public Guid AccountId { get; set; }
-
         [ForeignKey(nameof(AccountId))]
         public Account Account { get; set; }
     }
