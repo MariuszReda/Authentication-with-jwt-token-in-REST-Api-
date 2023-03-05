@@ -1,6 +1,9 @@
 using Common.Options;
+using Hairdresser.Api.Data;
 using Hairdresser.Api.Extensions;
 using Hairdresser.Api.Installers;
+using Hairdresser.Api.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,10 +13,11 @@ builder.Services.AddIdentityServices(builder.Configuration);
 
 builder.Services.InstallServices(builder.Configuration);
 
+
+
 builder.Services.AddControllers();
 
 builder.Services.AddEndpointsApiExplorer();
-
 
 
 builder.Services.AddSwaggerGen(x =>
@@ -53,6 +57,26 @@ builder.Services.AddCors(options => options.AddPolicy("AllowOrigin", policy => p
 
 
 var app = builder.Build();
+
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+
+    try
+    {
+        var userManager = services.GetRequiredService<UserManager<Account>>();
+        var roleManager = services.GetRequiredService<RoleManager<Role>>();
+
+        // Wywo³anie SeedData
+        await SeedData.InitializeAsync(userManager, roleManager);
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine(ex.Message);
+    }
+}
+
+
 
 app.UseAuthorization();
 

@@ -70,5 +70,10 @@ namespace Hairdresser.Api.Services
 
             return true;
         }
+
+        public async Task<List<Tag>> GetAllTagsAsync()
+        {
+            return await _dataContext.Tags.ToListAsync();
+        }
     }
 }

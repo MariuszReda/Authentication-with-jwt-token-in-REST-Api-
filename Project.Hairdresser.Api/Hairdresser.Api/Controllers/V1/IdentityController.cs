@@ -17,6 +17,33 @@ namespace Hairdresser.Api.Controllers.V1
             _identityService= identityService;
         }
 
+        [HttpPost(ApiRoutes.Identity.RegisterAdmin)]
+        public async Task<IActionResult> RegisterAdmin([FromBody] UserRegistrationRequest request)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(new AuthFailedResponse 
+                { 
+                    Errors = ModelState.Values.SelectMany(x=>x.Errors.Select(mess=>mess.ErrorMessage))
+                });
+            }
+            var authResponse = await _identityService.RegisterAdminAsync(request.Register);
+
+            if (!authResponse.Success)
+            {
+                return BadRequest(new AuthFailedResponse
+                {
+                    Errors = authResponse.ErrorMessage
+                });
+            }
+
+            return Ok(new AuthSuccessResponse
+            {
+                Token = authResponse.Token
+            });
+
+        }
+
         [HttpPost(ApiRoutes.Identity.Register)]
         public async Task<IActionResult> Register([FromBody] UserRegistrationRequest request)
         {

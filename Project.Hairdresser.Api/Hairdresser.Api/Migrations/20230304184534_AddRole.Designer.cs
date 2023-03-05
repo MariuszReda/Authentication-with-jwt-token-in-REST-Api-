@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Hairdresser.Api.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20230301224404_PostUser")]
-    partial class PostUser
+    [Migration("20230304184534_AddRole")]
+    partial class AddRole
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -43,6 +43,21 @@ namespace Hairdresser.Api.Migrations
                     b.HasIndex("AccountId");
 
                     b.ToTable("Posts");
+                });
+
+            modelBuilder.Entity("Hairdresser.Api.Domain.Tag", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("TagName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Tags");
                 });
 
             modelBuilder.Entity("Hairdresser.Api.Models.Account", b =>
@@ -125,19 +140,9 @@ namespace Hairdresser.Api.Migrations
                     b.Property<Guid>("RoleId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("AccountId")
-                        .HasColumnType("uniqueidentifier");
-
-                    //b.Property<Guid>("RoleId1")
-                    //    .HasColumnType("uniqueidentifier");
-
                     b.HasKey("UserId", "RoleId");
 
-                    b.HasIndex("AccountId");
-
                     b.HasIndex("RoleId");
-
-                    //b.HasIndex("RoleId1");
 
                     b.ToTable("AspNetUserRoles", (string)null);
                 });
@@ -271,26 +276,14 @@ namespace Hairdresser.Api.Migrations
 
             modelBuilder.Entity("Hairdresser.Api.Models.AccountRole", b =>
                 {
-                    b.HasOne("Hairdresser.Api.Models.Account", "Account")
+                    b.HasOne("Hairdresser.Api.Models.Role", "Role")
                         .WithMany("AccountRoles")
-                        .HasForeignKey("AccountId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Hairdresser.Api.Models.Role", null)
-                        .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Hairdresser.Api.Models.Role", "Role")
+                    b.HasOne("Hairdresser.Api.Models.Account", "Account")
                         .WithMany("AccountRoles")
-                        .HasForeignKey("RoleId1")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Hairdresser.Api.Models.Account", null)
-                        .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();

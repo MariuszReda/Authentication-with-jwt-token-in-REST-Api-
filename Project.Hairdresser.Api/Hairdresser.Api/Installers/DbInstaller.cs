@@ -11,6 +11,8 @@ namespace Hairdresser.Api.Installers
             {
                 options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"));
             });
+
+           
         }
     }
 }
