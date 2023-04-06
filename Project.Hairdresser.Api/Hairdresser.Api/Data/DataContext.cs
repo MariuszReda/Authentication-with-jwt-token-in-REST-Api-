@@ -17,6 +17,7 @@ namespace Hairdresser.Api.Data
 
         public DbSet<Domain.Post> Posts => Set<Domain.Post>();
         public DbSet<Tag> Tags => Set<Tag>();
+        public DbSet<PostTag> PostTags => Set<PostTag>();
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -33,6 +34,10 @@ namespace Hairdresser.Api.Data
                 .WithOne(accountRole => accountRole.Role)
                 .HasForeignKey(account => account.RoleId)
                 .IsRequired();
+
+            builder.Entity<PostTag>().
+                HasNoKey();
+                
         }
 
     }

@@ -1,4 +1,5 @@
-﻿using Hairdresser.Api.Services;
+﻿using Hairdresser.Api.Mapper;
+using Hairdresser.Api.Services;
 
 namespace Hairdresser.Api.Installers
 {
@@ -14,6 +15,7 @@ namespace Hairdresser.Api.Installers
             services.AddScoped<IIdentityService, IdentityService>();
             services.AddScoped<IPostService, PostService>();
             services.AddScoped<ITagService, TagService>();
+            services.AddScoped<IMapper, Hairdresser.Api.Mapper.Mapper>();
 
         }
         

@@ -7,5 +7,7 @@ namespace Hairdresser.Api.Models
         public DateTime CreatedAt { get; set; } = DateTime.Now;
         public DateTime? UpdatedAt { get; set; } = null;
         public ICollection<AccountRole> AccountRoles { get; set; } = null!;
+        public string Name { get; set; } = "Jan";
+        public string Surname { get; set; } = "Kowalski";
     }
 }

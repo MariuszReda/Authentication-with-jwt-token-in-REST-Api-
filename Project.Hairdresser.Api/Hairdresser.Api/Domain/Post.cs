@@ -11,5 +11,7 @@ namespace Hairdresser.Api.Domain
         public Guid AccountId { get; set; }
         [ForeignKey(nameof(AccountId))]
         public Account Account { get; set; }
+        [NotMapped]
+        public virtual List<PostTag> Tags { get; set; }
     }
 }

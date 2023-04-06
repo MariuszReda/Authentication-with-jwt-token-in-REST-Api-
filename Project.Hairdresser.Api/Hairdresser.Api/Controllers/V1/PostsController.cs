@@ -3,6 +3,7 @@ using Hairdresser.Api.Contracts.Responses;
 using Hairdresser.Api.Contracts.V1;
 using Hairdresser.Api.Domain;
 using Hairdresser.Api.Extensions;
+using Hairdresser.Api.Mapper;
 using Hairdresser.Api.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
@@ -14,9 +15,11 @@ namespace Hairdresser.Api.Controllers.V1
     public class PostsController : Controller
     {
         private readonly IPostService _postService;
-        public PostsController(IPostService postService)
+        private readonly IMapper _mapper;
+        public PostsController(IPostService postService, IMapper mapper)
         {
             _postService = postService;
+            _mapper= mapper;
         }
 
 
@@ -30,22 +33,26 @@ namespace Hairdresser.Api.Controllers.V1
         [HttpPost(ApiRoutes.Post.Create)]
         public async Task<IActionResult> Create([FromBody] CreatePostRequest request) 
         {
+            var postId = Guid.NewGuid();
             var post = new Post {
+                Id = postId,
                 Name = request.Name,
-                AccountId = Guid.Parse( HttpContext.GetUserId())
+                AccountId = Guid.Parse( HttpContext.GetUserId()),
+                Tags = request.Tags.Select(x=> new PostTag { PostId = postId, TagId = x.Tag.Id }).ToList()
             };
 
-            if (post.Id != Guid.Empty)
-            {
-                post.Id = Guid.NewGuid();
-            }
             await _postService.CreatePostAsync(post);
 
             var baseUrl = $"{HttpContext.Request.Scheme}://{HttpContext.Request.Host.ToUriComponent()}";
 
             var location = baseUrl + "/" + ApiRoutes.Post.Get.Replace("{postId}", post.Id.ToString());
 
-            var response = new PostResponse { Id = post.Id };
+            var response = new PostResponse 
+            { 
+                Id = post.Id,
+                UserId = Guid.Parse( HttpContext.GetUserId()),
+                Tags = post.Tags.Select(x=> new TagResponse { Name = x.Tag.Name})
+            };
             return Created(location, response);
         }
 
@@ -59,7 +66,8 @@ namespace Hairdresser.Api.Controllers.V1
             {
                 return NotFound();
             }
-            return Ok(post);
+            var response = _mapper.PostResponseMap(post);
+            return Ok(response);
         }
 
 
